@@ -1,3 +1,3 @@
-from .loader import Loader
+from .loader import Loader, DictDot
 
-__all__ = ["Loader"]
+__all__ = ["Loader", "DictDot"]

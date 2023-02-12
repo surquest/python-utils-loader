@@ -6,9 +6,9 @@ import json
 from collections import OrderedDict
 
 
-class DotOrderedDict(OrderedDict):
+class DictDot(OrderedDict):
 
-    """dot.notation access to dictionary attributes"""
+    """Dot.notation access to dictionary attributes"""
     __getattr__ = dict.get
     __setattr__ = dict.__setitem__
     __delattr__ = dict.__delitem__
@@ -17,7 +17,7 @@ class DotOrderedDict(OrderedDict):
 class YAMLLoader(yaml.FullLoader):
 
     def construct_yaml_map(self, node):
-        data = DotOrderedDict()
+        data = DictDot()
         yield data
         value = self.construct_mapping(node)
         data.update(value)
@@ -31,22 +31,22 @@ YAMLLoader.add_constructor(
 
 class Loader(object):
     """Loader class helps you to handle inputs from different sources as:
-    YAML, JSON, TXT
+    YAML, JSON, TXT, SQL
     """
 
     @classmethod
-    def load(cls, path, output_type=DotOrderedDict):
+    def load(cls, path, output_type=DictDot):
         """Method loads any type of the file (YAML, JSON) and
         returns it as OrderedDict
 
         :type path: str
         :param path: path to the file (including file name)
 
-        :type output_type: dict or DotOrderedDict
+        :type output_type: dict or DictDot
         :param output_type: type of the output object
 
-        :returns: DotOrderedDict
-        :rtype: DotOrderedDict
+        :returns: DictDot
+        :rtype: DictDot
 
         :Example:
 
@@ -66,14 +66,18 @@ class Loader(object):
 
             return cls.load_yaml(path=path, output_type=output_type)
 
+        if file_type.lower() in ["sql", "txt"]:
+
+            return cls.load_txt(path=path)
+
     @classmethod
-    def load_yaml(cls, path, output_type=DotOrderedDict):
+    def load_yaml(cls, path, output_type=DictDot):
         """Method loads yaml file and returns it as OrderedDict
 
         :type path: str
         :param path: path to the file (including file name)
 
-        :type output_type: dict or DotOrderedDict
+        :type output_type: dict or DictDot
         :param output_type: type of the output object
 
         :returns: Yaml file content as OrderedDict
@@ -100,13 +104,13 @@ class Loader(object):
         return config
 
     @classmethod
-    def load_json(cls, path, output_type=dict):
+    def load_json(cls, path, output_type=DictDot):
         """Method loads json file and returns it as OrderedDict
 
         :type path: str
         :param path: path to the file (including file name)
 
-        :type output_type: dict or DotOrderedDict
+        :type output_type: dict or DictDot
         :param output_type: type of the output object
 
         :returns: JSON file content as dict
@@ -130,14 +134,14 @@ class Loader(object):
             with open(path, 'r') as f:
                 config = json.load(
                     f,
-                    object_pairs_hook=DotOrderedDict
+                    object_pairs_hook=DictDot
                 )
 
         return config
 
     @classmethod
-    def load_sql(cls, path):
-        """Method loads SQL file and returns it as string
+    def load_txt(cls, path):
+        """Method loads TXT or SQL files and returns it as string
 
         :type path: str
         :param path: path to the file (including file name)
@@ -149,7 +153,7 @@ class Loader(object):
 
         ::
 
-            config = Loader.load_sql(path="./config.yaml")
+            config = Loader.load_txt(path="./config.sql")
 
         """
 
