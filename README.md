@@ -1,3 +1,6 @@
+![PyPI - Downloads](https://img.shields.io/pypi/dm/surquest-utils-loader?style=flat-square)
+![GitHub](https://img.shields.io/github/license/surquest/python-utils-loader?style=flat-square)
+
 # Introduction
 
 Standalone Loader class simplifies loading of content from files `.yaml`, `.json`, `.sql`, and `.txt`.
