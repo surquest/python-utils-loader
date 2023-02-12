@@ -7,7 +7,6 @@ from collections import OrderedDict
 
 
 class DictDot(OrderedDict):
-
     """Dot.notation access to dictionary attributes"""
     __getattr__ = dict.get
     __setattr__ = dict.__setitem__
@@ -59,15 +58,12 @@ class Loader(object):
         file_type = path.split(".")[-1]
 
         if file_type.lower() in ["json"]:
-
             return cls.load_json(path=path, output_type=output_type)
 
         if file_type.lower() in ["yaml", "yml"]:
-
             return cls.load_yaml(path=path, output_type=output_type)
 
         if file_type.lower() in ["sql", "txt"]:
-
             return cls.load_txt(path=path)
 
     @classmethod
@@ -158,7 +154,6 @@ class Loader(object):
         """
 
         with open(path, 'r') as f:
-
             content = f.read()
 
         return content

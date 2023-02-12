@@ -1,9 +1,10 @@
 import pytest
 from surquest.utils.loader import Loader, DictDot
 
-class TestLoader:
 
+class TestLoader:
     ERROR_MSG = "Wrong value: Expected: `{}`, Actual: `{}`"
+
     @pytest.mark.parametrize(
         "file,expected",
         [

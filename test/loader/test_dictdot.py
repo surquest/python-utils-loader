@@ -1,15 +1,17 @@
 import pytest
 from surquest.utils.loader import Loader, DictDot
 
-class TestDictDot:
 
+class TestDictDot:
     ERROR_MSG = "Wrong value: Expected: `{}`, Actual: `{}`"
 
     @pytest.mark.parametrize(
         "file,expected",
         [
-            ("../data/sample.json", {"name": "Smith", "members": 2, "firstMember": "John"}),
-            ("../data/sample.yaml", {"name": "Smith", "members": 2, "firstMember": "John"})
+            ("../data/sample.json",
+             {"name": "Smith", "members": 2, "firstMember": "John"}),
+            ("../data/sample.yaml",
+             {"name": "Smith", "members": 2, "firstMember": "John"})
         ]
     )
     def test__success(self, file, expected):
@@ -30,5 +32,3 @@ class TestDictDot:
             self.ERROR_MSG.format(
                 expected.get("firstMember"), data.family.members[0].name
             )
-
-
