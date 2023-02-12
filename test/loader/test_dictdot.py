@@ -1,5 +1,5 @@
 import pytest
-from surquest.utils.loader import Loader, DictDot
+from surquest.utils.loader import Loader
 
 
 class TestDictDot:
