@@ -51,7 +51,7 @@ jobs:
         gistID: ${{ secrets.GIST_ID }}        # https://gist.github.com/surquest/93ef1d1867f7da354e3cc179b766a7e2
         filename: coverage-badges.json
         label: coverage
-        message: ${{ steps.test.outputs.COVERAGE }}"
+        message: ${{ steps.test.outputs.COVERAGE }}
         minColorRange: 75
         maxColorRange: 90
-        valColorRange: ${{ steps.test.outputs.COVERAGE }}"
+        valColorRange: ${{ steps.test.outputs.COVERAGE }}
