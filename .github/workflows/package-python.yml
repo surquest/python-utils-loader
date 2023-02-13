@@ -43,13 +43,13 @@ jobs:
         SCORE=$(awk '$1 == "TOTAL" {print $NF+0}' test.coverage.log)
         cat test.coverage.log
     - name: Publish coverage badge
-        uses: schneegans/dynamic-badges-action@v1.4.0
-        with:
-          auth: ${{ secrets.GIST_TOKEN }}           # GIST_TOKEN is a GitHub personal access token with scope "gist".
-          gistID: 7e806dfab30a76bd7503663f4257c9a0  # https://gist.github.com/surquest/93ef1d1867f7da354e3cc179b766a7e2
-          filename: coverage-badges.json
-          label: coverage-badges--python-utils-loader
-          message: ${{ env.SCORE }} # 75 # ${{ env.total }}%
-          minColorRange: 50
-          maxColorRange: 90
-          valColorRange: ${{ env.SCORE }} # 75 # ${{ env.total }}
+      uses: schneegans/dynamic-badges-action@v1.6.0
+      with:
+        auth: ${{ secrets.GIST_TOKEN }}           # GIST_TOKEN is a GitHub personal access token with scope "gist".
+        gistID: 7e806dfab30a76bd7503663f4257c9a0  # https://gist.github.com/surquest/93ef1d1867f7da354e3cc179b766a7e2
+        filename: coverage-badges.json
+        label: coverage-badges--python-utils-loader
+        message: ${{ env.SCORE }} # 75 # ${{ env.total }}%
+        minColorRange: 50
+        maxColorRange: 90
+        valColorRange: ${{ env.SCORE }} # 75 # ${{ env.total }}
