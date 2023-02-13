@@ -6,8 +6,6 @@ name: Test
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
   test:
@@ -60,13 +58,3 @@ jobs:
         minColorRange: 75
         maxColorRange: 90
         valColorRange: ${{ steps.test.outputs.COVERAGE }}
-
-  deploy-docs:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./docs/site
