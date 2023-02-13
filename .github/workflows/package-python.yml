@@ -37,10 +37,11 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
+      id: test
       run: |
         cd test                       # go to test directory
         pytest > test.coverage.log    # run tests and save output into file
-        COVERAGE_SCORE=$(awk '$1 == "TOTAL" {print $NF+0}' test.coverage.log) >> $GITHUB_ENV
+        COVERAGE_SCORE=$(awk '$1 == "TOTAL" {print $NF+0}' test.coverage.log) >> $GITHUB_OUTPUT
         cat test.coverage.log
     - name: Publish coverage badge
       uses: schneegans/dynamic-badges-action@v1.6.0
@@ -49,7 +50,7 @@ jobs:
         gistID: ${{ secrets.GIST_ID }}        # https://gist.github.com/surquest/93ef1d1867f7da354e3cc179b766a7e2
         filename: coverage-badges.json
         label: coverage
-        message: ${{ env.COVERAGE_SCORE }}
-        minColorRange: 50
+        message: ${{ steps.test.outputs.COVERAGE_SCORE }}"
+        minColorRange: 75
         maxColorRange: 90
-        valColorRange: ${{ env.COVERAGE_SCORE }}
+        valColorRange: ${{ steps.test.outputs.COVERAGE_SCORE }}"
