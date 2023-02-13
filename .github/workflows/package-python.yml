@@ -41,6 +41,10 @@ jobs:
         cd test                       # go to test directory
         pytest > test.coverage.log    # run tests and save output into file
         SCORE=$(awk '$1 == "TOTAL" {print $NF+0}' test.coverage.log)
+        echo "---------------------------------------------"
+        echo "SCORE: $SCORE"
+        echo ${{ secrets.GIST_TOKEN }}
+        echo "---------------------------------------------"
         cat test.coverage.log
     - name: Publish coverage badge
       uses: schneegans/dynamic-badges-action@v1.6.0
