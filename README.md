@@ -1,5 +1,5 @@
 ![GitHub](https://img.shields.io/github/license/surquest/python-utils-loader?style=flat-square)
-![GitHub Workflow Status (with branch)](https://img.shields.io/github/actions/workflow/status/surquest/python-utils-loader/package-python.yml?branch=main&style=flat-square)
+![GitHub Workflow Status (with branch)](https://img.shields.io/github/actions/workflow/status/surquest/python-utils-loader/test.yml?branch=main&style=flat-square)
 ![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/surquest/6e25c317000917840152a5e702e71963/raw/python-utils-loader.json&style=flat-square)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/surquest-utils-loader?style=flat-square)
 
@@ -29,6 +29,47 @@ config_json = Loader.load_json(path="./path/to/config.json")
 config_sql = Loader.load(path="./path/to/config.sql")
 # alternatively load of sql file
 config_sql = Loader.load_sql(path="./path/to/config.sql")
+```
+
+# Installation
+
+```
+pip install surquest-utils-loader
+```
+
+# Additional information
+
+Content loaded from JSON or YAML files is returned as a DictDot (dictionary which keys are accessible as attributes). This allows you to access the content of the file using the dot notation. Lets assume example.yaml contains the following content:
+
+```yaml
+---
+family:
+  name: Smith
+  members:
+  - name: John # father
+    age: 40
+  - name: Jane # mother
+    age: 38
+```
+
+You can access the content of the file using the dot notation:
+
+```python
+from surquest.utils.loader import Loader
+
+config = Loader.load_yaml(path="./path/to/example.yaml")
+
+print(config.family.name) # Smith
+print(config.family.members[0].name) # John
+print(config.family.members[1].name) # Jane
+```
+
+In case you don't want to use the dot notation you can use the standard dictionary as output format for the loaded content:
+
+```python
+from surquest.utils.loader import Loader
+
+config = Loader.load_yaml(path="./path/to/example.yaml", output_type=dict)
 ```
 
 # Local development
