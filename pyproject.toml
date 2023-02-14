@@ -4,8 +4,8 @@ build-backend = "hatchling.build"
 
 [project]
 name = "surquest-utils-loader"
-version = "0.0.1rc2"
-description = "Standalone Loader class for simplification of loading configurations from YAML or JSON files."
+version = "0.0.1"
+description = "Standalone Loader class for simplification of loading configurations from YAML, JSON, SQL or TXT files."
 authors = [
     {name= "Michal Švarc", email= "michal.svarc@surquest.com"}
 ]
